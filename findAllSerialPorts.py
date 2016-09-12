@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import serial, glob
-import getPTYports
+import getPTSports
 
 ttyFound = []
 usbFound = []

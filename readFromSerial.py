@@ -3,7 +3,7 @@
 import serial
 import time
 from multiprocessing import Process, Pipe
-import getPTYports #find the avaliable serial port on the local machine 
+import getPTSports #find the avaliable serial port on the local machine 
 from random import randint #just for random tests...
 from threading import Thread
 
