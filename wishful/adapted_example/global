@@ -1,0 +1,1 @@
+python contiki_control_program_global.py -v --config config/localhost/control_program_global_config.yaml
