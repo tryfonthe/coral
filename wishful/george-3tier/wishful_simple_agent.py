@@ -1,17 +1,18 @@
-"""
-contiki_control_agent.py: Implementation of WiSHFUL control agent for Contiki
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-Adapted by George Violettas
+"""
+wishful_agent_simple.py: First implementation of WiSHFUL agent
 
 Usage:
-   contiki_control_agent.py [options] [-q | -v]
+   wishful_agent_simple.py [options] [-q | -v]
 
 Options:
    --logfile name      Name of the logfile
    --config configFile Config file path
 
 Example:
-   ./contiki_control_agent -v --config ./control_agent_config.yaml
+   ./wishful_agent_simple -v --config ./config.yaml
 
 Other options:
    -h, --help          show this help message and exit
@@ -26,14 +27,18 @@ import sys, os
 import yaml
 import wishful_agent
 
-__author__ = "Peter Ruckebusch"
-__copyright__ = "Copyright (c) 2016, Ghent University, iMinds"
+__author__ = "Piotr Gawlowicz, Mikolaj Chwalisz"
+__copyright__ = "Copyright (c) 2015, Technische Universität Berlin"
 __version__ = "0.1.0"
+__email__ = "{gawlowicz, chwalisz}@tkn.tu-berlin.de"
 
-log = logging.getLogger('contiki_control_agent.main')
-control_agent = wishful_agent.Agent()
 
-control_agent.set_agent_info(name="John Fixon")#working only if removed from *.yaml
+#mute SimpleModule2
+simpleModuleLogger = logging.getLogger('SimpleModule2')
+simpleModuleLogger.setLevel(logging.CRITICAL)
+
+log = logging.getLogger('wishful_agent.main')
+agent = wishful_agent.Agent()
 
 def main(args):
     log.debug(args)
@@ -44,8 +49,9 @@ def main(args):
     with open(config_file_path, 'r') as f:
         config = yaml.load(f)
 
-    control_agent.load_config(config)
-    control_agent.run()
+    agent.load_config(config)
+    agent.run()
+
 
 if __name__ == "__main__":
     try:
@@ -80,4 +86,4 @@ if __name__ == "__main__":
         log.debug("Agent exits")
     finally:
         log.debug("Exit")
-        control_agent.stop()
+        agent.stop()

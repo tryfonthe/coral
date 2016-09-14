@@ -1,1 +1,0 @@
-python gc.py -q --config config/localhost/control_program_global_config.yaml

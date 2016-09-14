@@ -33,7 +33,7 @@ import wishful_upis as upis
 #from local_control_program import my_local_control_program
 
 #import ./coral/wishful/hierarchical_control/local_control_program #import george_local_program
-import local_control_program
+from lc import george_call
 
 __author__ = "Piotr Gawlowicz, Mikolaj Chwalisz"
 __copyright__ = "Copyright (c) 2015, Technische Universität Berlin"
@@ -81,25 +81,25 @@ def main(args):
         print("\n")
         if nodes:
             print("Connected nodes", [str(node.name) for node in nodes])
-            lcpDescriptor = controller.node(nodes[0]).hc.start_local_control_program(program=george_local_program)
+            lcpDescriptor = controller.node(nodes[0]).hc.start_local_control_program(program=george_call)
 
 
             print("{} Local Control Progam Started, ID: {}".format(datetime.datetime.now(), lcpDescriptor.id))
 
             msgNum = 5
-            while msgNum:
-                gcRandInt = random.randint(1, 20)
-                print("Sending gcRandInt: {}".format(gcRandInt))
-                lcpDescriptor.send({"gcRandInt":gcRandInt})
+            while msgNum>0:
+                gcMsg = "msg from gc No "+str(msgNum) #random.randint(1, 20)
+                print("Sending gcRandInt: "+gcMsg)
+                lcpDescriptor.send({"gcRandInt":gcMsg})
 
                 while True:
                     msg = lcpDescriptor.recv(timeout=1)
                     if msg:
-                        print ("{} Message from Local Control Program: {}".msg)
+                        print ("Message from lc"+str(msg) )
                         msgNum = msgNum - 1
                         break
                     else:
-                        print ("{} Waiting for george_num".format(datetime.datetime.now()))
+                        print ("{} no msg received".format(datetime.datetime.now()))
 
             retVal = lcpDescriptor.close()
             print("{} Local Control Progam ID: {} was {}".format(datetime.datetime.now(), lcpDescriptor.id, retVal))

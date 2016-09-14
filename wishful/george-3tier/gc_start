@@ -1,0 +1,1 @@
+./gc.py --quiet --config ./controller_config.yaml 
