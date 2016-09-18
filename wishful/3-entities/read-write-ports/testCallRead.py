@@ -9,7 +9,6 @@ import getPTSports
 
 if __name__ == '__main__':
 
-	
 	ptsports=getPTSports.getAllpts()
 	print ("ptsports portsfound:")
 	print ptsports
@@ -17,9 +16,12 @@ if __name__ == '__main__':
 	
 	for i in range(len(ptsports)-1): #there is an empty record at the end !!!!
 		d="d"+str(i)
-		d = Thread(target=readFromSerial.readPort, args=(ptsports[i],115200,))
-		d.start()
-
+		#d = Thread(target=readFromSerial.readPort, args=(ptsports[i],115200,))
+		msg=readFromSerial.readPort(ptsports[i],115200,)
+	#while True:
+		#res=d.start()
+		print msg
+		
 
 	#for pts in ptsports:
 	#readFromSerial.StartRead(ptsports[0],115200)

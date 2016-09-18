@@ -9,7 +9,8 @@ obj_z1/uiplib.o: ../../../contiki/core/net/ip/uiplib.c \
  ../../../contiki/core/./contiki-default-conf.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./sys/autostart.h \
  ../../../contiki/core/./sys/process.h \
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/ctimer.h \
@@ -22,7 +23,9 @@ obj_z1/uiplib.o: ../../../contiki/core/net/ip/uiplib.c \
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/energest.h \
  ../../../contiki/core/./net/ip/uiplib.h \
- ../../../contiki/core/./net/ip/uip-debug.h
+ ../../../contiki/core/./net/ip/uip-debug.h \
+ ../../../contiki/core/./net/net-debug.h \
+ ../../../contiki/core/./net/linkaddr.h
 ../../../contiki/core/net/ip/uiplib.c :
  ../../../contiki/core/./net/ip/uip.h :
  ../../../contiki/core/./net/ip/uipopt.h :
@@ -34,7 +37,8 @@ obj_z1/uiplib.o: ../../../contiki/core/net/ip/uiplib.c \
  ../../../contiki/core/./contiki-default-conf.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./sys/autostart.h :
  ../../../contiki/core/./sys/process.h :
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/ctimer.h :
@@ -48,3 +52,5 @@ obj_z1/uiplib.o: ../../../contiki/core/net/ip/uiplib.c \
  ../../../contiki/core/./sys/energest.h :
  ../../../contiki/core/./net/ip/uiplib.h :
  ../../../contiki/core/./net/ip/uip-debug.h :
+ ../../../contiki/core/./net/net-debug.h :
+ ../../../contiki/core/./net/linkaddr.h :

@@ -8,7 +8,8 @@ obj_z1/anti-replay.o: ../../../contiki/core/net/llsec/anti-replay.c \
  ../../../contiki/core/./contiki-default-conf.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./sys/autostart.h \
  ../../../contiki/core/./sys/process.h \
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/ctimer.h \
@@ -26,7 +27,8 @@ obj_z1/anti-replay.o: ../../../contiki/core/net/llsec/anti-replay.c \
  ../../../contiki/core/./net/mac/frame802154.h \
  ../../../contiki/core/./net/ip/uip.h \
  ../../../contiki/core/./net/ip/uipopt.h \
- ../../../contiki/core/./net/ip/tcpip.h
+ ../../../contiki/core/./net/ip/tcpip.h \
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h
 ../../../contiki/core/net/llsec/anti-replay.c :
  ../../../contiki/core/./net/llsec/anti-replay.h :
  ../../../contiki/core/./contiki.h :
@@ -37,7 +39,8 @@ obj_z1/anti-replay.o: ../../../contiki/core/net/llsec/anti-replay.c \
  ../../../contiki/core/./contiki-default-conf.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./sys/autostart.h :
  ../../../contiki/core/./sys/process.h :
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/ctimer.h :
@@ -56,3 +59,4 @@ obj_z1/anti-replay.o: ../../../contiki/core/net/llsec/anti-replay.c \
  ../../../contiki/core/./net/ip/uip.h :
  ../../../contiki/core/./net/ip/uipopt.h :
  ../../../contiki/core/./net/ip/tcpip.h :
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h :

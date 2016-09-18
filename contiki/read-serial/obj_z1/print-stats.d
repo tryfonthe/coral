@@ -14,7 +14,7 @@ obj_z1/print-stats.o: ../../../contiki/core/lib/print-stats.c \
  ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
  ../../../contiki/core/./net/rime/unicast.h \
  ../../../contiki/core/./net/rime/broadcast.h \
  ../../../contiki/core/./net/rime/abc.h \
@@ -36,6 +36,7 @@ obj_z1/print-stats.o: ../../../contiki/core/lib/print-stats.c \
  ../../../contiki/core/./sys/procinit.h \
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/energest.h \
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h \
  ../../../contiki/core/./net/rime/channel.h \
  ../../../contiki/core/./net/rime/chameleon.h \
  ../../../contiki/core/./net/queuebuf.h \
@@ -77,7 +78,7 @@ obj_z1/print-stats.o: ../../../contiki/core/lib/print-stats.c \
  ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
  ../../../contiki/core/./net/rime/unicast.h :
  ../../../contiki/core/./net/rime/broadcast.h :
  ../../../contiki/core/./net/rime/abc.h :
@@ -99,6 +100,7 @@ obj_z1/print-stats.o: ../../../contiki/core/lib/print-stats.c \
  ../../../contiki/core/./sys/procinit.h :
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/energest.h :
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h :
  ../../../contiki/core/./net/rime/channel.h :
  ../../../contiki/core/./net/rime/chameleon.h :
  ../../../contiki/core/./net/queuebuf.h :

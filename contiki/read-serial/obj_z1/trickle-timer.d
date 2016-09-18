@@ -8,7 +8,8 @@ obj_z1/trickle-timer.o: ../../../contiki/core/lib/trickle-timer.c \
  ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./lib/random.h
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./lib/random.h
 ../../../contiki/core/lib/trickle-timer.c :
  ../../../contiki/platform/z1/./contiki-conf.h :
  ../../../contiki/platform/z1/./platform-conf.h :
@@ -19,4 +20,5 @@ obj_z1/trickle-timer.o: ../../../contiki/core/lib/trickle-timer.c \
  ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./lib/random.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./lib/random.h :

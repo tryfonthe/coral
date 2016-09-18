@@ -40,6 +40,8 @@ simpleModuleLogger.setLevel(logging.CRITICAL)
 log = logging.getLogger('wishful_agent.main')
 agent = wishful_agent.Agent()
 
+agent.set_agent_info(name="John Fixon")#working only if removed from *.yaml
+
 def main(args):
     log.debug(args)
 

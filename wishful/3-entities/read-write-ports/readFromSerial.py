@@ -49,22 +49,29 @@ def readPort(serPort, serBaudRate):
 			while True:
 				response = ser.readline()
 				if response:# it only reacts if response != null
-					printThis(ser.port,response)	# !!!!!!!!!!!!!!			       
+					return response
+					#printThis(ser.port,response)#!!!!!!!!!!!
+					#returnThis(response)#!!!!!!!!!!!!!!			       
 			ser.close()
 		except Exception, e1:
 			return "error communicating...: " + str(e1)
 		else:
 			return "cannot read from serial port (port not open?)" 
-
+	else:
+		print ("port is closed")
 
 # Calling this from the read function
 def printThis(port, data):  
 	print ("port: " + port + ", received: "+data)  
-	
+
+#just return the data whenever received...
+def returnThis(data):
+	#sendThread=Thread(target=returnThis(data)
+	print ("data received:")
+	return data	
 
 #------------- call this from outside -----------------"
 def StartRead(serPort, serBaudRate):
-	setupPort(serPort, serBaudRate)
 	readProcess = Thread(target=readPort, args=(serPort, serBaudRate) )
 	readProcess.start()
 #------------- call this from outside -----------------"
@@ -72,4 +79,4 @@ def StartRead(serPort, serBaudRate):
 
 #if __name__ == '__main__':
 
-
+#	StartRead(serPort, serBaudRate)

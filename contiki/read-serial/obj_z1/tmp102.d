@@ -7,7 +7,8 @@ obj_z1/tmp102.o: ../../../contiki/platform/z1/dev/tmp102.c \
  ../../../contiki/core/./contiki-default-conf.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./sys/autostart.h \
  ../../../contiki/core/./sys/process.h \
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/ctimer.h \
@@ -20,7 +21,8 @@ obj_z1/tmp102.o: ../../../contiki/platform/z1/dev/tmp102.c \
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/energest.h \
  ../../../contiki/platform/z1/dev/i2cmaster.h \
- ../../../contiki/platform/z1/dev/tmp102.h
+ ../../../contiki/platform/z1/dev/tmp102.h \
+ ../../../contiki/core/./lib/sensors.h
 ../../../contiki/platform/z1/dev/tmp102.c :
  ../../../contiki/core/./contiki.h :
  ../../../contiki/core/./contiki-version.h :
@@ -30,7 +32,8 @@ obj_z1/tmp102.o: ../../../contiki/platform/z1/dev/tmp102.c \
  ../../../contiki/core/./contiki-default-conf.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./sys/autostart.h :
  ../../../contiki/core/./sys/process.h :
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/ctimer.h :
@@ -44,3 +47,4 @@ obj_z1/tmp102.o: ../../../contiki/platform/z1/dev/tmp102.c \
  ../../../contiki/core/./sys/energest.h :
  ../../../contiki/platform/z1/dev/i2cmaster.h :
  ../../../contiki/platform/z1/dev/tmp102.h :
+ ../../../contiki/core/./lib/sensors.h :

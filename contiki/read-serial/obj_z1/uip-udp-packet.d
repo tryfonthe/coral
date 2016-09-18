@@ -10,7 +10,8 @@ obj_z1/uip-udp-packet.o: ../../../contiki/core/net/ip/uip-udp-packet.c \
  ../../../contiki/core/./contiki-default-conf.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./sys/autostart.h \
  ../../../contiki/core/./sys/process.h \
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/ctimer.h \
@@ -26,6 +27,7 @@ obj_z1/uip-udp-packet.o: ../../../contiki/core/net/ip/uip-udp-packet.c \
  ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-engines.h \
  ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-route.h \
  ../../../contiki/core/./net/ipv6/multicast/smrf.h \
+ ../../../contiki/core/./net/ipv6/multicast/esmrf.h \
  ../../../contiki/core/./net/ipv6/multicast/roll-tm.h \
  ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-stats.h
 ../../../contiki/core/net/ip/uip-udp-packet.c :
@@ -40,7 +42,8 @@ obj_z1/uip-udp-packet.o: ../../../contiki/core/net/ip/uip-udp-packet.c \
  ../../../contiki/core/./contiki-default-conf.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./sys/autostart.h :
  ../../../contiki/core/./sys/process.h :
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/ctimer.h :
@@ -56,5 +59,6 @@ obj_z1/uip-udp-packet.o: ../../../contiki/core/net/ip/uip-udp-packet.c \
  ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-engines.h :
  ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-route.h :
  ../../../contiki/core/./net/ipv6/multicast/smrf.h :
+ ../../../contiki/core/./net/ipv6/multicast/esmrf.h :
  ../../../contiki/core/./net/ipv6/multicast/roll-tm.h :
  ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-stats.h :

@@ -1,9 +1,11 @@
 obj_z1/uip-ds6-nbr.o: ../../../contiki/core/net/ipv6/uip-ds6-nbr.c \
  ../../../contiki/core/./lib/list.h \
- ../../../contiki/core/./net/linkaddr.h \
+ ../../../contiki/core/./net/link-stats.h \
+ ../../../contiki/core/net/linkaddr.h \
  ../../../contiki/platform/z1/./contiki-conf.h \
  ../../../contiki/platform/z1/./platform-conf.h \
  ../../../contiki/cpu/msp430/./msp430def.h \
+ ../../../contiki/core/./net/linkaddr.h \
  ../../../contiki/core/./net/packetbuf.h \
  ../../../contiki/core/./net/llsec/llsec802154.h \
  ../../../contiki/core/./net/mac/frame802154.h \
@@ -14,7 +16,8 @@ obj_z1/uip-ds6-nbr.o: ../../../contiki/core/net/ipv6/uip-ds6-nbr.c \
  ../../../contiki/core/./contiki-default-conf.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./sys/autostart.h \
  ../../../contiki/core/./sys/process.h \
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/ctimer.h \
@@ -26,6 +29,7 @@ obj_z1/uip-ds6-nbr.o: ../../../contiki/core/net/ipv6/uip-ds6-nbr.c \
  ../../../contiki/core/./sys/procinit.h \
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/energest.h \
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h \
  ../../../contiki/core/./net/ipv6/uip-ds6-nbr.h \
  ../../../contiki/core/./net/nbr-table.h \
  ../../../contiki/core/./net/netstack.h \
@@ -38,13 +42,16 @@ obj_z1/uip-ds6-nbr.o: ../../../contiki/core/net/ipv6/uip-ds6-nbr.c \
  ../../../contiki/core/./net/ipv6/uip-ds6.h \
  ../../../contiki/core/./net/ipv6/uip-nd6.h \
  ../../../contiki/core/./net/ipv6/uip-ds6-route.h \
- ../../../contiki/core/./net/ip/uip-debug.h
+ ../../../contiki/core/./net/ip/uip-debug.h \
+ ../../../contiki/core/./net/net-debug.h
 ../../../contiki/core/net/ipv6/uip-ds6-nbr.c :
  ../../../contiki/core/./lib/list.h :
- ../../../contiki/core/./net/linkaddr.h :
+ ../../../contiki/core/./net/link-stats.h :
+ ../../../contiki/core/net/linkaddr.h :
  ../../../contiki/platform/z1/./contiki-conf.h :
  ../../../contiki/platform/z1/./platform-conf.h :
  ../../../contiki/cpu/msp430/./msp430def.h :
+ ../../../contiki/core/./net/linkaddr.h :
  ../../../contiki/core/./net/packetbuf.h :
  ../../../contiki/core/./net/llsec/llsec802154.h :
  ../../../contiki/core/./net/mac/frame802154.h :
@@ -55,7 +62,8 @@ obj_z1/uip-ds6-nbr.o: ../../../contiki/core/net/ipv6/uip-ds6-nbr.c \
  ../../../contiki/core/./contiki-default-conf.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./sys/autostart.h :
  ../../../contiki/core/./sys/process.h :
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/ctimer.h :
@@ -67,6 +75,7 @@ obj_z1/uip-ds6-nbr.o: ../../../contiki/core/net/ipv6/uip-ds6-nbr.c \
  ../../../contiki/core/./sys/procinit.h :
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/energest.h :
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h :
  ../../../contiki/core/./net/ipv6/uip-ds6-nbr.h :
  ../../../contiki/core/./net/nbr-table.h :
  ../../../contiki/core/./net/netstack.h :
@@ -80,3 +89,4 @@ obj_z1/uip-ds6-nbr.o: ../../../contiki/core/net/ipv6/uip-ds6-nbr.c \
  ../../../contiki/core/./net/ipv6/uip-nd6.h :
  ../../../contiki/core/./net/ipv6/uip-ds6-route.h :
  ../../../contiki/core/./net/ip/uip-debug.h :
+ ../../../contiki/core/./net/net-debug.h :

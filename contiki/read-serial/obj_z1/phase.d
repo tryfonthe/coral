@@ -8,13 +8,12 @@ obj_z1/phase.o: ../../../contiki/core/net/mac/phase.c \
  ../../../contiki/core/./sys/rtimer.h \
  ../../../contiki/cpu/msp430/./rtimer-arch.h \
  ../../../contiki/core/./lib/list.h ../../../contiki/core/./lib/memb.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./net/netstack.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./net/netstack.h \
  ../../../contiki/core/./net/llsec/llsec.h \
  ../../../contiki/core/./net/mac/mac.h \
  ../../../contiki/core/./dev/radio.h \
  ../../../contiki/core/./net/mac/rdc.h \
- ../../../contiki/core/./net/mac/framer.h \
- ../../../contiki/core/./net/packetbuf.h \
  ../../../contiki/core/./net/llsec/llsec802154.h \
  ../../../contiki/core/./net/mac/frame802154.h \
  ../../../contiki/core/./net/ip/uip.h \
@@ -33,6 +32,9 @@ obj_z1/phase.o: ../../../contiki/core/net/mac/phase.c \
  ../../../contiki/core/./sys/procinit.h \
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/energest.h \
+ ../../../contiki/core/./net/mac/framer.h \
+ ../../../contiki/core/./net/packetbuf.h \
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h \
  ../../../contiki/core/./sys/ctimer.h \
  ../../../contiki/core/./net/queuebuf.h \
  ../../../contiki/core/./net/nbr-table.h
@@ -46,13 +48,12 @@ obj_z1/phase.o: ../../../contiki/core/net/mac/phase.c \
  ../../../contiki/core/./sys/rtimer.h :
  ../../../contiki/cpu/msp430/./rtimer-arch.h :
  ../../../contiki/core/./lib/list.h ../../../contiki/core/./lib/memb.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./net/netstack.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./net/netstack.h :
  ../../../contiki/core/./net/llsec/llsec.h :
  ../../../contiki/core/./net/mac/mac.h :
  ../../../contiki/core/./dev/radio.h :
  ../../../contiki/core/./net/mac/rdc.h :
- ../../../contiki/core/./net/mac/framer.h :
- ../../../contiki/core/./net/packetbuf.h :
  ../../../contiki/core/./net/llsec/llsec802154.h :
  ../../../contiki/core/./net/mac/frame802154.h :
  ../../../contiki/core/./net/ip/uip.h :
@@ -71,6 +72,9 @@ obj_z1/phase.o: ../../../contiki/core/net/mac/phase.c \
  ../../../contiki/core/./sys/procinit.h :
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/energest.h :
+ ../../../contiki/core/./net/mac/framer.h :
+ ../../../contiki/core/./net/packetbuf.h :
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h :
  ../../../contiki/core/./sys/ctimer.h :
  ../../../contiki/core/./net/queuebuf.h :
  ../../../contiki/core/./net/nbr-table.h :

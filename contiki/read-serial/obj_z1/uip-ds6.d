@@ -11,7 +11,8 @@ obj_z1/uip-ds6.o: ../../../contiki/core/net/ipv6/uip-ds6.c \
  ../../../contiki/core/./contiki-default-conf.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./sys/autostart.h \
  ../../../contiki/core/./sys/process.h \
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/ctimer.h \
@@ -26,8 +27,6 @@ obj_z1/uip-ds6.o: ../../../contiki/core/net/ipv6/uip-ds6.c \
  ../../../contiki/core/./sys/stimer.h \
  ../../../contiki/core/./net/ipv6/uip-ds6.h \
  ../../../contiki/core/./net/ipv6/uip-ds6-route.h \
- ../../../contiki/core/./lib/list.h \
- ../../../contiki/core/./net/ipv6/uip-ds6-nbr.h \
  ../../../contiki/core/./net/nbr-table.h \
  ../../../contiki/core/./net/linkaddr.h \
  ../../../contiki/core/./net/netstack.h \
@@ -35,10 +34,22 @@ obj_z1/uip-ds6.o: ../../../contiki/core/net/ipv6/uip-ds6.c \
  ../../../contiki/core/./net/mac/mac.h \
  ../../../contiki/core/./dev/radio.h \
  ../../../contiki/core/./net/mac/rdc.h \
+ ../../../contiki/core/./net/llsec/llsec802154.h \
+ ../../../contiki/core/./net/mac/frame802154.h \
  ../../../contiki/core/./net/mac/framer.h \
+ ../../../contiki/core/./lib/list.h \
+ ../../../contiki/core/./net/ipv6/uip-ds6-nbr.h \
+ ../../../contiki/core/./net/ipv6/multicast/uip-mcast6.h \
+ ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-engines.h \
+ ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-route.h \
+ ../../../contiki/core/./net/ipv6/multicast/smrf.h \
+ ../../../contiki/core/./net/ipv6/multicast/esmrf.h \
+ ../../../contiki/core/./net/ipv6/multicast/roll-tm.h \
+ ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-stats.h \
  ../../../contiki/core/./net/ip/uip-packetqueue.h \
  ../../../contiki/core/./sys/ctimer.h \
- ../../../contiki/core/./net/ip/uip-debug.h
+ ../../../contiki/core/./net/ip/uip-debug.h \
+ ../../../contiki/core/./net/net-debug.h
 ../../../contiki/core/net/ipv6/uip-ds6.c :
  ../../../contiki/core/./lib/random.h :
  ../../../contiki/core/./net/ipv6/uip-nd6.h :
@@ -52,7 +63,8 @@ obj_z1/uip-ds6.o: ../../../contiki/core/net/ipv6/uip-ds6.c \
  ../../../contiki/core/./contiki-default-conf.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./sys/autostart.h :
  ../../../contiki/core/./sys/process.h :
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/ctimer.h :
@@ -67,8 +79,6 @@ obj_z1/uip-ds6.o: ../../../contiki/core/net/ipv6/uip-ds6.c \
  ../../../contiki/core/./sys/stimer.h :
  ../../../contiki/core/./net/ipv6/uip-ds6.h :
  ../../../contiki/core/./net/ipv6/uip-ds6-route.h :
- ../../../contiki/core/./lib/list.h :
- ../../../contiki/core/./net/ipv6/uip-ds6-nbr.h :
  ../../../contiki/core/./net/nbr-table.h :
  ../../../contiki/core/./net/linkaddr.h :
  ../../../contiki/core/./net/netstack.h :
@@ -76,7 +86,19 @@ obj_z1/uip-ds6.o: ../../../contiki/core/net/ipv6/uip-ds6.c \
  ../../../contiki/core/./net/mac/mac.h :
  ../../../contiki/core/./dev/radio.h :
  ../../../contiki/core/./net/mac/rdc.h :
+ ../../../contiki/core/./net/llsec/llsec802154.h :
+ ../../../contiki/core/./net/mac/frame802154.h :
  ../../../contiki/core/./net/mac/framer.h :
+ ../../../contiki/core/./lib/list.h :
+ ../../../contiki/core/./net/ipv6/uip-ds6-nbr.h :
+ ../../../contiki/core/./net/ipv6/multicast/uip-mcast6.h :
+ ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-engines.h :
+ ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-route.h :
+ ../../../contiki/core/./net/ipv6/multicast/smrf.h :
+ ../../../contiki/core/./net/ipv6/multicast/esmrf.h :
+ ../../../contiki/core/./net/ipv6/multicast/roll-tm.h :
+ ../../../contiki/core/./net/ipv6/multicast/uip-mcast6-stats.h :
  ../../../contiki/core/./net/ip/uip-packetqueue.h :
  ../../../contiki/core/./sys/ctimer.h :
  ../../../contiki/core/./net/ip/uip-debug.h :
+ ../../../contiki/core/./net/net-debug.h :

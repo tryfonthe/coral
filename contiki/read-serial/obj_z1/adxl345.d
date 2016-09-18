@@ -7,7 +7,8 @@ obj_z1/adxl345.o: ../../../contiki/platform/z1/dev/adxl345.c \
  ../../../contiki/core/./contiki-default-conf.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./sys/autostart.h \
  ../../../contiki/core/./sys/process.h \
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/ctimer.h \
@@ -21,6 +22,7 @@ obj_z1/adxl345.o: ../../../contiki/platform/z1/dev/adxl345.c \
  ../../../contiki/core/./sys/energest.h \
  ../../../contiki/platform/z1/dev/adxl345.h \
  ../../../contiki/platform/z1/./dev/i2cmaster.h \
+ ../../../contiki/core/./lib/sensors.h \
  ../../../contiki/dev/cc2420/cc2420.h ../../../contiki/core/./dev/spi.h \
  ../../../contiki/core/./dev/radio.h \
  ../../../contiki/dev/cc2420/cc2420_const.h \
@@ -36,7 +38,8 @@ obj_z1/adxl345.o: ../../../contiki/platform/z1/dev/adxl345.c \
  ../../../contiki/core/./contiki-default-conf.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./sys/autostart.h :
  ../../../contiki/core/./sys/process.h :
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/ctimer.h :
@@ -50,6 +53,7 @@ obj_z1/adxl345.o: ../../../contiki/platform/z1/dev/adxl345.c \
  ../../../contiki/core/./sys/energest.h :
  ../../../contiki/platform/z1/dev/adxl345.h :
  ../../../contiki/platform/z1/./dev/i2cmaster.h :
+ ../../../contiki/core/./lib/sensors.h :
  ../../../contiki/dev/cc2420/cc2420.h ../../../contiki/core/./dev/spi.h :
  ../../../contiki/core/./dev/radio.h :
  ../../../contiki/dev/cc2420/cc2420_const.h :

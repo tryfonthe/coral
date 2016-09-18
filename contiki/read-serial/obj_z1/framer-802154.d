@@ -5,6 +5,7 @@ obj_z1/framer-802154.o: ../../../contiki/core/net/mac/framer-802154.c \
  ../../../contiki/platform/z1/./contiki-conf.h \
  ../../../contiki/platform/z1/./platform-conf.h \
  ../../../contiki/cpu/msp430/./msp430def.h \
+ ../../../contiki/core/./net/linkaddr.h \
  ../../../contiki/core/./net/llsec/llsec802154.h \
  ../../../contiki/core/./net/ip/uip.h \
  ../../../contiki/core/./net/ip/uipopt.h \
@@ -13,7 +14,8 @@ obj_z1/framer-802154.o: ../../../contiki/core/net/mac/framer-802154.c \
  ../../../contiki/core/./contiki-default-conf.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./sys/autostart.h \
  ../../../contiki/core/./sys/process.h \
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/ctimer.h \
@@ -26,7 +28,7 @@ obj_z1/framer-802154.o: ../../../contiki/core/net/mac/framer-802154.c \
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h \
  ../../../contiki/core/./sys/energest.h \
  ../../../contiki/core/./net/packetbuf.h \
- ../../../contiki/core/./net/linkaddr.h \
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h \
  ../../../contiki/core/./lib/random.h
 ../../../contiki/core/net/mac/framer-802154.c :
  ../../../contiki/core/./net/mac/framer-802154.h :
@@ -35,6 +37,7 @@ obj_z1/framer-802154.o: ../../../contiki/core/net/mac/framer-802154.c \
  ../../../contiki/platform/z1/./contiki-conf.h :
  ../../../contiki/platform/z1/./platform-conf.h :
  ../../../contiki/cpu/msp430/./msp430def.h :
+ ../../../contiki/core/./net/linkaddr.h :
  ../../../contiki/core/./net/llsec/llsec802154.h :
  ../../../contiki/core/./net/ip/uip.h :
  ../../../contiki/core/./net/ip/uipopt.h :
@@ -43,7 +46,8 @@ obj_z1/framer-802154.o: ../../../contiki/core/net/mac/framer-802154.c \
  ../../../contiki/core/./contiki-default-conf.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/autostart.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./sys/autostart.h :
  ../../../contiki/core/./sys/process.h :
  ../../../contiki/core/./sys/timer.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/ctimer.h :
@@ -56,5 +60,5 @@ obj_z1/framer-802154.o: ../../../contiki/core/net/mac/framer-802154.c \
  ../../../contiki/core/./sys/loader.h ../../../contiki/core/./sys/clock.h :
  ../../../contiki/core/./sys/energest.h :
  ../../../contiki/core/./net/packetbuf.h :
- ../../../contiki/core/./net/linkaddr.h :
+ ../../../contiki/core/./net/mac/tsch/tsch-conf.h :
  ../../../contiki/core/./lib/random.h :

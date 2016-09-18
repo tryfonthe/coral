@@ -7,7 +7,8 @@ obj_z1/ctimer.o: ../../../contiki/core/sys/ctimer.c \
  ../../../contiki/cpu/msp430/./msp430def.h \
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h \
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h \
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./contiki.h \
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h \
+ ../../../contiki/core/./contiki.h \
  ../../../contiki/core/./contiki-version.h \
  ../../../contiki/core/./contiki-default-conf.h \
  ../../../contiki/core/./sys/process.h \
@@ -30,7 +31,8 @@ obj_z1/ctimer.o: ../../../contiki/core/sys/ctimer.c \
  ../../../contiki/cpu/msp430/./msp430def.h :
  ../../../contiki/core/./sys/process.h ../../../contiki/core/./sys/pt.h :
  ../../../contiki/core/./sys/lc.h ../../../contiki/core/./sys/lc-switch.h :
- ../../../contiki/core/./sys/cc.h ../../../contiki/core/./contiki.h :
+ ../../../contiki/core/./sys/cc.h ../../../contiki/core/./sys/cc-gcc.h :
+ ../../../contiki/core/./contiki.h :
  ../../../contiki/core/./contiki-version.h :
  ../../../contiki/core/./contiki-default-conf.h :
  ../../../contiki/core/./sys/process.h :
