@@ -30,12 +30,11 @@ import gevent
 import yaml
 import wishful_upis as upis
 
-#from local_control_program import my_local_control_program
-
-#import ./coral/wishful/hierarchical_control/local_control_program #import george_local_program
-
-from lc import lcsend
-from lcReceive import  lcrec
+from lc import write2Serial, readFromSerial
+from threading import Thread
+import threading
+import printThread
+import time
 
 __author__ = "Piotr Gawlowicz, Mikolaj Chwalisz"
 __copyright__ = "Copyright (c) 2015, Technische Universität Berlin"
@@ -68,28 +67,47 @@ def default_callback(group, node, cmd, data):
     print("GC: DEFAULT CALLBACK : Group: {}, NodeName: {}, Cmd: {}, Returns: {}".format(group, node.name, cmd, data))
 
 
-	
-def talk2node(node,msgName,msgIter):
+# need to SERIOUSLY RESEARCH ON THIS
+@controller.add_callback(upis.net.get_info_of_connected_devices)
+def get_info_of_connected_devices_reponse(group, node, data):
+    global log
+    log.info("get_info_of_connected_devices_reponse : Group:{}, NodeName:{}, msg:{}".format(group, node.name, data))
+    
+    
+    
+def write2node (node,msgTag, msgBody):
 	#print("GC: Node:" + str(node.name) )
-	lc = controller.node(nodes[0]).hc.start_local_control_program(program=lcsend)
-
-	#print("GC: {} lc started. ID: {}".format(datetime.datetime.now().time(), lc.id))
+	msg={msgTag:msgBody}
+	lc_name="lc_"+str(node.name)	
+	lc_name = controller.node(node).hc.start_local_control_program(program=write2Serial )  
 	
-	#print ("GC: started def: talk2node" )
-	print("GC :--> LC, No:{}".format(msgIter) )
-	#gcMsg = "GC-->LC, No:{}".format(msgIter)
-
-	lc.send({msgName:2})
 	
-	#print ("GC: started def: oneReceive")
-	msg = lc.recv(timeout=2)
+	
+	
+def readFromNode (node):
+	#print("GC: Node:" + str(node.name) )
+	
+	target = controller.node(node).hc.start_local_control_program(program=readFromSerial) 
+
+		#print("GC: {} lc started. ID: {}".format(datetime.datetime.now().time(), lc.id))	
+
+		#lc.send({msgName:lc_name})
+	
+	msg = target.recv(timeout=2)
 	if msg:
-		print ("GC: Msg from lc:{}".format(msg) )
-		msgG=[{"george_num"}]
-		#send the received msg to Java
+		print ("GC: Msg from id:"+str(target.id)+":{}".format(msg) )
+		
+		msgG=[{"msgTag"}]
+		
+		#send the received msgG to Java
+		
+		
 	else:
 		print ("GC: No msg...")#.format(datetime.datetime.now()))
 		
+		
+		#retVal = lcpDescriptor.close()
+		#print("{} Local Control Progam ID: {} was {}".format(datetime.datetime.now(), lcpDescriptor.id, retVal))
 
 def main(args):
 	log.debug(args)
@@ -102,43 +120,37 @@ def main(args):
 	controller.load_config(config)
 	controller.start()
 	
-	msgNum = 0
-	msgIter = 1000
+	msgIter = 1000#just a global var for testing
 
 	#control loop
 	while True:
-		print("\n")
+		
+		#threading.active_count()
+		print("\nActive Threads:{}".format(threading.active_count() ) )
 		if nodes:
-			
-			talk2node(nodes[0],"msgName", msgIter )
-			#print("GC: msgNum No:{}".format(msgIter)  )
-			msgIter+=1
-			
-			#getNodeMsg(nodes[0],msgNum)
-			#print("msgIter No:{}".format(msgNum) ) 
-			msgNum+=1
-	
-			#print("Connected nodes", [str(node.name) for node in nodes])
-			#lcpDescriptor = controller.node(nodes[0]).hc.start_local_control_program(program=george_call)
-			#print("{} Local Control Progam Started, ID: {}".format(datetime.datetime.now(), lcpDescriptor.id))
-			#gcMsg = "msg from gc No "+str(msgNum)
-			#print("Sending gcRandInt: "+gcMsg)
-			#lcpDescriptor.send({"gcRandInt":gcMsg})
+			for n in nodes:
+				
+				
+				msgTag=n.name
+				msgBody=n.name
+				
+				write2node (n,msgTag, msgBody)
+				
+				readFromNode(n)
+				
+				#lc="lc_"+n.name
+				#n.name=threading.Thread(target=readFromNode,args=(n,) )
+				#n.name.start()
+				#print("Connected nodes:",[str(n.name)]
+				#readFromNode(n)
 
-			#msg = lcpDescriptor.recv(timeout=1)
-			#if msg:
-			#	print ("Message from lc"+str(msg) )
-			#	msgNum = msgNum + 1
-			#	break
-			#else:
-			#	print ("{} no msg received".format(datetime.datetime.now()))
-
-			#retVal = lcpDescriptor.close()
-			#print("{} Local Control Progam ID: {} was {}".format(datetime.datetime.now(), lcpDescriptor.id, retVal))
-			gevent.sleep(10)
+				msgIter+=1
+				print ("iter:"+str(msgIter) )
+			
+			gevent.sleep(5)
 		else:
-			print ("no node connected yet... sleeping for 10 secs...")
-		gevent.sleep(10)
+			print ("No node yet. Wait 5 secs...")
+		gevent.sleep(5)
 
 
 if __name__ == "__main__":

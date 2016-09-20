@@ -1,0 +1,1 @@
+./agent1.py --quiet --config ./agent_config.yaml
