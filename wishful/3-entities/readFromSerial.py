@@ -1,6 +1,11 @@
 #!/usr/bin/python
 
+# be careful: import serial does not work with python3
+# it obviously needs pip installation of pyserial.
+#be careful: Only install for v3 in (dev)user@....
 import serial
+
+   
 import time
 from multiprocessing import Process, Pipe
 import getPTSports #find the avaliable serial port on the local machine 
@@ -37,8 +42,8 @@ def readPort(serPort, serBaudRate):
 	if not ser.isOpen():
 		try: 
 			ser.open()
-		except Exception, e:
-			print "error open serial port: " + str(e)
+		except Exception as e:
+			print (str(e)+", exiting now...") #error opening serial port
 			exit()
 
 	if ser.isOpen():
@@ -53,8 +58,8 @@ def readPort(serPort, serBaudRate):
 					#printThis(ser.port,response)#!!!!!!!!!!!
 					#returnThis(response)#!!!!!!!!!!!!!!			       
 			ser.close()
-		except Exception, e1:
-			return "error communicating...: " + str(e1)
+		except Exception as e1:
+			return "error communicating...: ".format(e1)
 		else:
 			return "cannot read from serial port (port not open?)" 
 	else:
@@ -79,4 +84,4 @@ def StartRead(serPort, serBaudRate):
 
 #if __name__ == '__main__':
 
-#	StartRead(serPort, serBaudRate)
+#	StartRead("/dev/pts/21", 115200)

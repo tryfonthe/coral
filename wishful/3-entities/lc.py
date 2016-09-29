@@ -45,6 +45,8 @@ def readFromSerial(controller):
 	#do all needed imports here!!!
 	import time
 	import datetime
+	from getPTSports import get1stpts
+	from readFromSerial import readPort
 
 	msgNum = 112
 
@@ -56,19 +58,35 @@ def readFromSerial(controller):
 		
 	while  True:
 		if not controller.is_stopped():
-			
+
 			#wait for ser port to answer...
 			#get an answer from the serial port
 
 			msgTag="msgTag"
+
+
+			#trying to read from the ACTUAL SERIAL PORT
+			ptsPort=get1stpts()
+			print ("port found: "+ptsPort)
+			answer=readPort(ptsPort, 115200)
+			if  answer:
+				print ("Sending to GC:"+str(answer) )
+				controller.send_upstream({msgTag:str(answer)})#send to GC
+
+
+			#all this is for testing only
+			"""
+
+			msgTag="msgTag"
 			msgBody=controller.id#"msgBody"
-			
+
 			if (msgTag=="msgTag"):	                
 				controller.send_upstream({msgTag:msgBody})#send to GC
 			else:
 				time2wait=5 #can we wait via the thread ???
 				print(("LC: No msg. Wait: {}s".format(time2wait)))
 				time.sleep(time2wait)
+			"""
 		else:
 			print ("no GC contact. Sleep for 5s...")
 			time.sleep(5)

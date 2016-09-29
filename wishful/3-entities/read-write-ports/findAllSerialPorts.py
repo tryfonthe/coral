@@ -15,8 +15,8 @@ ptsPorts = []
 def getttyPorts():
     for tty in glob.glob('/dev/tty*'): 
         ttyFound.append(tty)
-	probePort(ttyFound, ttyPorts)
-	if ttyPorts:
+    probePort(ttyFound, ttyPorts)
+    if ttyPorts:
 		return ttyPorts # ATTENTION: returning ALL tty ports. NEEDS BIIIIIIG CONSIDERATION
     else:
     	pass 
@@ -27,9 +27,9 @@ def getUSBPort():
         usbFound.append(usb)
 	probePort(usbFound, usbPorts)
 	if usbPorts[1]:
-		return usbPorts[1] # ATTENTION: returning USB1 where zolertia was found. THIS NEEDS BIIIIIIG CONSIDERATION
+	    return usbPorts[1] # ATTENTION: returning USB1 where zolertia was found. THIS NEEDS BIIIIIIG CONSIDERATION
     else:
-    	pass 
+        pass 
 
 #search ONLY tty ports ... (cooja simulated serial2pty)
 #ATTENTION: Returns a list

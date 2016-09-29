@@ -40,7 +40,7 @@ simpleModuleLogger.setLevel(logging.CRITICAL)
 log = logging.getLogger('wishful_agent.main')
 agent = wishful_agent.Agent()
 
-agent.set_agent_info(name="another agent")#working only if removed from *.yaml
+agent.set_agent_info(name="Agent No2")#working only if removed from *.yaml
 
 def main(args):
     log.debug(args)

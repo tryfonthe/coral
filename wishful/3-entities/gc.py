@@ -30,6 +30,7 @@ import gevent
 import yaml
 import wishful_upis as upis
 
+
 from lc import write2Serial, readFromSerial
 from threading import Thread
 import threading
@@ -72,6 +73,7 @@ def default_callback(group, node, cmd, data):
 def get_info_of_connected_devices_reponse(group, node, data):
     global log
     log.info("get_info_of_connected_devices_reponse : Group:{}, NodeName:{}, msg:{}".format(group, node.name, data))
+    print ("get_info_of_connected_devices_reponse : Group:{}, NodeName:{}, msg:{}".format(group, node.name, data))
     
     
     
