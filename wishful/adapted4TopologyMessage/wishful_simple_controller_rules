@@ -30,12 +30,9 @@ import gevent
 import yaml
 import wishful_upis as upis
 
-#from local_control_program import my_local_control_program
+from local_control_program_rule import my_local_control_program_rule
 
-#import ./coral/wishful/hierarchical_control/local_control_program #import george_local_program
-import local_control_program
-
-__author__ = "Piotr Gawlowicz, Mikolaj Chwalisz"
+__author__ = "Piotr Gawlowicz"
 __copyright__ = "Copyright (c) 2015, Technische Universität Berlin"
 __version__ = "0.1.0"
 __email__ = "{gawlowicz, chwalisz}@tkn.tu-berlin.de"
@@ -74,57 +71,18 @@ def main(args):
 
     controller.load_config(config)
     controller.start()
-
-
-    #control loop
-    while True:
-        print("\n")
-        if nodes:
-            print("Connected nodes", [str(node.name) for node in nodes])
-            #lcpDescriptor = controller.node(nodes[0]).hc.start_local_control_program(program=george_local_program)
-
-
-            print("{} Local Control Progam Started, ID: {}".format(datetime.datetime.now(), lcpDescriptor.id))
-
-            msgNum = 5
-            while msgNum:
-                gcRandInt = random.randint(1, 20)
-                print("Sending gcRandInt: {}".format(gcRandInt))
-                lcpDescriptor.send({"gcRandInt":gcRandInt})
-
-                while True:
-                    msg = lcpDescriptor.recv(timeout=1)
-                    if msg:
-                        print ("{} Message from Local Control Program: {}".msg)
-                        msgNum = msgNum - 1
-                        break
-                    else:
-                        print ("{} Waiting for george_num".format(datetime.datetime.now()))
-
-            retVal = lcpDescriptor.close()
-            print("{} Local Control Progam ID: {} was {}".format(datetime.datetime.now(), lcpDescriptor.id, retVal))
-            gevent.sleep(10)
-        else:
-            print ("no node connected yet... sleeping for 10 secs...")
-            gevent.sleep(10)
-
-        #gevent.sleep(10)
-
-    """
+   
     #control loop
     while True:
         print("\n")
         print("Connected nodes", [str(node.name) for node in nodes])
         if nodes:
-            lcpDescriptor = controller.node(nodes[0]).hc.start_local_control_program(program=my_local_control_program)
+            lcpDescriptor = controller.node(nodes[0]).hc.start_local_control_program(program=my_local_control_program_rule)
             print("{} Local Control Progam Started, ID: {}".format(datetime.datetime.now(), lcpDescriptor.id))
 
-            msgNum = 5
+            lcpDescriptor.send("install_pkt_rule")
+            msgNum = 10
             while msgNum:
-                newChannel = random.randint(1, 30)
-                print("{} Sending new channel to set: {}".format(datetime.datetime.now(), newChannel))
-                lcpDescriptor.send({"new_channel":newChannel})
-
                 while True:
                     msg = lcpDescriptor.recv(timeout=1)
                     if msg:
@@ -134,13 +92,15 @@ def main(args):
                     else:
                         print ("{} Waiting for message".format(datetime.datetime.now()))
 
-                gevent.sleep(5)
+            #gevent.sleep(5)
+            lcpDescriptor.send("remove_pkt_rule")
+            lcpDescriptor.recv(timeout=10)
 
             retVal = lcpDescriptor.close()
             print("{} Local Control Progam ID: {} was {}".format(datetime.datetime.now(), lcpDescriptor.id, retVal))
 
         gevent.sleep(10)
-    """
+
 
 if __name__ == "__main__":
     try:

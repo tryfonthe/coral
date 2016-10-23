@@ -1,96 +1,95 @@
-__author__ = "Piotr Gawlowicz"
-__copyright__ = "Copyright (c) 2015, Technische Universitat Berlin"
-__version__ = "0.1.0"
-__email__ = "gawlowicz@tkn.tu-berlin.de"
+__author__ = "George Violettas, Tryfon Theodorou"
+__copyright__ = "Copyright (c) 2016, University of Macedonia, Greece"
+__version__ = "1.0.0"
+__email__ = "georgevio@gmail.com, tryfonthe@gmail.com"
 
-def write2Serial(controller):
 
-	#do all needed imports here!!!
-	import time
-	import datetime
-	
-	while True:
-		if not controller.is_stopped():#this is the LC
-			gcMsg = controller.recv(timeout=2)
-			if gcMsg: #gcMsg is an array of two fields tuples
-				#msg2print = gcMsg["msgName"]#multifields messages
-				print("LC: received from gc: {}".format(gcMsg) )
-				
-				
-				
-				#send to UART port 
-		
-		
-		
-								
-
-				
-				
-			else:
-				time2wait=5
-				print(("LC: No msg. Wait: {}s".format(time2wait)))
-				time.sleep(time2wait)
-		else:
-			print ("no GC contact...")
-			time.sleep(5)
-						
-	#controller.stop()  
-	#print(("LC: {}, Id: {} - STOPPED".format(controller.name, controller.id)))  
-	
-	
-	
-						
 #Definition of Local Control Program
-def readFromSerial(controller):
-	#do all needed imports here!!!
+def coral_lc(controller):
+    #do all needed imports here!!!
 	import time
 	import datetime
+	from write2anyPort import writeThis
+	from readFromSerial import StartRead, readPort,StartReadThread
 	from getPTSports import get1stpts
-	from readFromSerial import readPort
 
-	msgNum = 112
-
+	# Remember: this method is called automatically when the this "program" is called by the GC
 	@controller.set_default_callback()
-	def default_callback(data):
-		print(("\nLC: {}, Id: {} - STARTED".format(controller.name, controller.id)))
+	def default_callback(cmd, data):
+		print(("{} DEFAULT CALLBACK : Cmd: {}, Returns: {}".format(datetime.datetime.now(), cmd, data)))
+		print ("Reading from serial port: "+ptsPort)
+		print("this is the set_default_callback method print...")
 
-	print(("\nLC: {},Id: {}-STARTED".format(controller.name, controller.id)))
-		
-	while  True:
-		if not controller.is_stopped():
-
-			#wait for ser port to answer...
-			#get an answer from the serial port
-
-			msgTag="msgTag"
+		# example of a UPI call logic
+		#result = controller.radio.iface("wlan0").get_channel()
 
 
-			#trying to read from the ACTUAL SERIAL PORT
+# ????????????????????????????????????????????????????????????????????????????????????????
+
+# how do we call this ??????????
+# for the moment, it is NOT WORKING !!!!!
+#====== Reading from UART (Serial port) and send it to GC ==========================
+		#answer=readPort(ptsPort, 115200)
+		#if  answer:
+		#	print ("Sending to GC:"+str(answer) )
+		#	controller.send_upstream({"myChannel":answer})    
+#==================================================================================			    
+
+
+#====== Serial Port Discovery (Contiki, Cooja, etc.) =================================
+	times2print=1
+	portOk = False
+	while not portOk:
+		try:
 			ptsPort=get1stpts()
-			print ("port found: "+ptsPort)
-			answer=readPort(ptsPort, 115200)
-			if  answer:
-				print ("Sending to GC:"+str(answer) )
-				controller.send_upstream({msgTag:str(answer)})#send to GC
+			portOk=True
+		except Exception as e:
+			if times2print%40==0 or times2print==1: # just prints less error messages
+				print ("\nUART Problem: "+str(e))
+				print("Will retry every 5 secs, 4 ever")
+			time.sleep(5) 
+			times2print+=1
+#====================================================================================
 
+	# BE CAREFUL: This message sould be printed ONLY ONCE (One thread only...)
+	print(("\nLC- Name: {}, Id: {} - STARTED".format(controller.name, controller.id)))
+		
+	# Controlling the on screen waiting messages to print only once...
+	printMsgWaiting = True #just filtering too many waiting messages
+	printUARTAnswer = True
 
-			#all this is for testing only
-			"""
+#====== Reading from UART (Serial port) and send it to GC ==========================			
+	try:
+		print("waiting tor read something started")
+		StartReadThread(ptsPort, 115200, controller)	
+	except Exception as e:
+		print ("UART read error: "+str(e))
+#====================================================================================
+	 
+	#control loop
+	while not controller.is_stopped():
 
-			msgTag="msgTag"
-			msgBody=controller.id#"msgBody"
+#====== Waiting to receive from GC (4 ever): this is a non blocking call ===========
+		msg = controller.recv(timeout=1)
+		if msg:
+			newChannel = msg["new_channel"]         
+			print ("\nOOOUPS ! A MESSAGE JUST ARRIVED FROM GC: " + str(newChannel))
+#===================================================================================
 
-			if (msgTag=="msgTag"):	                
-				controller.send_upstream({msgTag:msgBody})#send to GC
-			else:
-				time2wait=5 #can we wait via the thread ???
-				print(("LC: No msg. Wait: {}s".format(time2wait)))
-				time.sleep(time2wait)
-			"""
+#=========== Write to UART - Serial  Port============================================ 
+			try:
+				writeThis(ptsPort,115200, str(newChannel) ) 
+			except Exception as e:
+				print ("UART problem: "+str(e) )
+#====================================================================================
+	 
+	 
+			printMsgWaiting =True
 		else:
-			print ("no GC contact. Sleep for 5s...")
-			time.sleep(5)
-				
-	controller.stop()  
-	print(("LC: {}, Id: {} - STOPPED".format(controller.name, controller.id)))  
-			
+			if printMsgWaiting: # just prints less error messages
+				print("LC: Waiting for message from GC")# It will print this only once
+				printMsgWaiting = False 
+
+
+      		   
+	print(("Local Control Program - Name: {}, Id: {} - STOPPED".format(controller.name, controller.id)))

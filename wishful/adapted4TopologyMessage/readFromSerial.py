@@ -20,7 +20,7 @@ from threading import Thread
 #    3. x, x is bigger than 0, float allowed, timeout block call
 
 
-def readPort(serPort, serBaudRate, controller):
+def readPort(serPort, serBaudRate):
 
 	ser = serial.Serial()
 	#ser.port     # set later accordingly
@@ -29,8 +29,8 @@ def readPort(serPort, serBaudRate, controller):
 	ser.bytesize = serial.EIGHTBITS #number of bits per bytes
 	ser.parity = serial.PARITY_NONE #set parity check: no parity
 	ser.stopbits = serial.STOPBITS_ONE #number of stop bits
-	ser.timeout = None          #block read
-	#ser.timeout = 1            #non-block read
+	#ser.timeout = None          #block read
+	ser.timeout = 1            #non-block read
 	#ser.timeout = 2              #timeout block read
 	ser.xonxoff = False     #disable software flow control
 	ser.rtscts = False     #disable hardware (RTS/CTS) flow control
@@ -43,7 +43,7 @@ def readPort(serPort, serBaudRate, controller):
 		try: 
 			ser.open()
 		except Exception as e:
-			print ("Read serial error:"+str(e)+"\nExiting now") #error opening serial port
+			print (str(e)+", exiting now...") #error opening serial port
 			exit()
 
 	if ser.isOpen():
@@ -52,21 +52,18 @@ def readPort(serPort, serBaudRate, controller):
 			ser.flushOutput()#flush output buffer, aborting current output 
 			#and discard all that is in buffer
 			while True:
-				print( "Read serial: Waiting...") 
 				response = ser.readline()
 				if response:# it only reacts if response != null
-					#return response
+					return response
 					#printThis(ser.port,response)#!!!!!!!!!!!
-					print("Received from UART: " + str(response) )
-					controller.send_upstream({"myChannel":response})  
 					#returnThis(response)#!!!!!!!!!!!!!!			       
 			ser.close()
 		except Exception as e1:
-			print ( " Read serial error: "+str(e1) )
+			return "error communicating...: ".format(e1)
 		else:
-			print ( "Read serial error (port not open?)" ) 
+			return "cannot read from serial port (port not open?)" 
 	else:
-		print ("Read serial: port is closed")
+		print ("port is closed")
 
 # Calling this from the read function
 def printThis(port, data):  
@@ -74,26 +71,15 @@ def printThis(port, data):
 
 #just return the data whenever received...
 def returnThis(data):
-	#sendThread=Thread(target=returnThis(data) )
-	print ("data received ok")
+	#sendThread=Thread(target=returnThis(data)
+	print ("data received:")
 	return data	
 
 #------------- call this from outside -----------------"
 def StartRead(serPort, serBaudRate):
-	answer = readPort(serPort, serBaudRate)
-	return answer
-#------------- call this from outside -----------------"
-
-
-
-#------------- call this from outside -----------------"
-def StartReadThread(serPort, serBaudRate, controller):
-	readProcess = Thread(target=readPort, args=(serPort, serBaudRate, controller,) )
-	#if readProcess.isAlive()==False:
+	readProcess = Thread(target=readPort, args=(serPort, serBaudRate) )
 	readProcess.start()
-
-	
-#------------ call this from outside -----------------"
+#------------- call this from outside -----------------"
 
 
 #if __name__ == '__main__':
