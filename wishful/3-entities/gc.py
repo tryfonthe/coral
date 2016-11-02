@@ -32,6 +32,7 @@ import wishful_upis as upis
 import json
 import time
 import socket
+import json
 
 #from lc import write2Serial, readFromSerial
 from lc import coral_lc
@@ -78,7 +79,7 @@ def javaSSConnection():
 			sockClient.connect(server_address)
 			#connection is NON-Blocking. If else the program halts in sockClient.recv()
 			sockClient.setblocking(0) 
-			print("...Connected to Java Socket Server (JSS)...") 
+			print("\n...Connected to Java Socket Server (JSS)...") 
 			conJSS=True
 		except:# ??? Do we need to GC to wait 4 ever for the Java Server?
 			print("No Java Server, waiting 5 secs...")
@@ -122,7 +123,7 @@ def get_info_of_connected_devices_reponse(group, node, data):
     
 
 def main(args):
-	global lcs
+	global lcs, conJSS
 	log.debug(args)
 
 	config_file_path = args['--config']
@@ -131,7 +132,7 @@ def main(args):
 		config = yaml.load(f)
 
 	controller.load_config(config) #load the yaml config file
-	controller.start() #start GC
+	controller.start() #start the Global Controller (GC)
 
 	
 
@@ -140,7 +141,7 @@ def main(args):
 	
 	printWaitNodesMsg=True # Just to control the on screen messages...
 	
-	#it will remain here until JSS appears.
+#=== it will remain here 4 ever until JSS appears===================
 	javaSSConnection()
 	
 	#testing connection with JSS. Can be safely ommited
@@ -148,41 +149,47 @@ def main(args):
 	print("\nSent a test msg to JSS\n")
 		
 	#control loop
-	while True: #global conJSS is false until JSS
-
+	while conJSS:
 		if nodes: # All the following will happen ONLY if at least one node exists
 			for n in nodes:
 				#eachNodePos=nodes.index(n) # position in nodes, of each node
 				eachNodePos=0 # ?????
-#========= Create an lc if it does not exist, and put in position same with n =================
+#========= Create an lc if it does not exist, and put in lc_array_position==node_array_pos ===
 				try:
 					lcList[eachNodePos] # if the particular lc exists, don't create it again
 
 #=========== Waiting to receive from ANY lc (if any) ==========================
-
 					msg = lcList[eachNodePos].recv(timeout=1)	
 
 					if msg:
-						msgString = str(msg)
-						print ("GC: Received msg from LC_id:"+str(lc.id) )#+":{}".format(msg) )
+						j=json.loads( str(msg) )
+						#lc_node=j['']
+						print ("GC: Received msg from LC_id:"+str(lc.id))# +", msg: "+j )
 
 						#msgG=[{"myChannel"}] #????? JSON Logic NOT implemented yet
 						#msg={msgG}
-
-						print ("Msg is: "+ msgString)
 #==============================================================================
 
 						
 #========== Send the received msgG to JSS ======================================
-						sockClient.sendall(bytes(msgString+"\n",'UTF-8') ) 
-						print ("msg sent to JSS: " + msgString)
+						try:
+							sockClient.sendall( bytes(str(j),'UTF-8' ) )
+							#sockClient.sendall(bytes("lc.id:"+str(lc.id)+" "+msgString+"\n",'UTF-8') ) 
+							print ("msg sent to JSS: " + str(j) )
+						except Exception as e:
+							print("Error sending to JSS:"+str(e) )
+							print("\nJSS disappeared :-(, try to reconnect")	
+							#if the connection was reset close the connection and reconnect
+							#javaSSConnection() # it does not work ???
+							#conJSS=False
+							#pass
 #===============================================================================
 						
 				except IndexError: #so it creates ONLY one instance of lc 4 each node
 					try:
 						lc = controller.node(n).hc.start_local_control_program(program=coral_lc )
 						lcList.insert(eachNodePos,lc)    # add it to the lc list SPECIFIC n index				
-						print("Created now: lcList["+str(eachNodePos)+"]")
+						print("Created new LC in: lcList["+str(eachNodePos)+"]")
 					except Exception as e:
 						print("lc creating error: "+str(e))
 #===============================================================================================
@@ -197,20 +204,26 @@ def main(args):
 				#print ("sockClient: "+str(e) )	#annoying repeated message because of time-outs
 				
 			if current:# if something was received from JSS
-		
+				data=json.loads(current.decode('utf-8') ) # Everything is sent in JSON format
+				lc_node=data["LC"] # specific node to sent the message to
+				lc_msg=data["Msg"]
 #========== the particular node(s) will come from JSS ==============
-				nPos =0 #= nodes[n]  # ????? THe JSS message is suppose to set the n number !!!
+				#nPos =0 #= nodes[n]  # ????? THe JSS message is suppose to set the n number !!!
 				#node =nodes.index(node.id) #?????
 				#node = nodes[0]
 #===================================================================
 
-				socksMsg = current.decode('UTF-8')#get a msg from Socks Server
 				print("\nHURRAY! I got a message from JSS...\n")
-				print ("Msg to LC: "+socksMsg)
+				print ("to LC:"+lc_node+", Msg: "+lc_msg)
 
 #================ Send the message to the particular lc ============					
 				try:
-					lcList[nPos].send({"new_channel":socksMsg}) #only send if JSS sent something
+					if (lc_node=="ALL"): # Broadcast message
+						for length in range(0, len(lcList) ):
+							lcList[length].send({"Msg":lc_msg})
+					else: # only specific node
+						lcList[int(lc_node)].send({"Msg":lc_msg}) #only send if JSS sent something
+					
 					current = "" # just clear contents for next iteration
 				except Exception as e:
 					print ("Error sending:"+str(e) ) #repeated annoying message	
@@ -226,11 +239,10 @@ def main(args):
 				printWaitNodesMsg= False # it will print the above message only once...
 		gevent.sleep(5)
 	
-	#if the connection was reset, close the connection and reconnect
-	#javaSSConnection() # it does not work ???
+	javaSSConnection() 
 			
-	controller.stop()  
-	print(("GC: {} - STOPPED".format(controller.name)))  
+	#controller.stop()  
+	#print(("GC: {} - STOPPED".format(controller.name)))  
 	
 
 if __name__ == "__main__":

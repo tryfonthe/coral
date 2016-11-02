@@ -22,8 +22,8 @@ public class question {
 	}
 
 	
-	public void createAndSend(String label, Object data){
-		JSONObject json = createJSON2Send(label, data);
+	public void createAndSend(Object label, Object data){
+		JSONObject json = createJSON2Send(label.toString(), data);
 		//System.out.println("JSON="+json);
 		int length =json.toString().length();
 		//System.out.println("length:"+length);
@@ -32,10 +32,16 @@ public class question {
 		int finalength=length+lengthofLength;
 		String fl=""+finalength;
 		//System.out.println("l="+fl);
-		mThreadServer.send(fl+json); 
+		//mThreadServer.send(fl+json); 
+		mThreadServer.send(json); 
 	}
 	
 	public void send(String s){
+		mThreadServer.send(s); 
+		//System.out.println("Sending: "+s);
+	}
+	
+	public void send(JSONObject s){
 		mThreadServer.send(s); 
 		//System.out.println("Sending: "+s);
 	}

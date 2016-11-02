@@ -13,7 +13,7 @@ def coral_lc(controller):
 	from readFromSerial import StartRead, readPort,StartReadThread
 	from getPTSports import get1stpts
 
-	# Remember: this method is called automatically when the this "program" is called by the GC
+	# Remember: this method is called automatically when this "program" is called by the GC
 	@controller.set_default_callback()
 	def default_callback(cmd, data):
 		print(("{} DEFAULT CALLBACK : Cmd: {}, Returns: {}".format(datetime.datetime.now(), cmd, data)))
@@ -70,15 +70,15 @@ def coral_lc(controller):
 	while not controller.is_stopped():
 
 #====== Waiting to receive from GC (4 ever): this is a non blocking call ===========
-		msg = controller.recv(timeout=1)
-		if msg:
-			newChannel = msg["new_channel"]         
-			print ("\nOOOUPS ! A MESSAGE JUST ARRIVED FROM GC: " + str(newChannel))
+		receivedMsg = controller.recv(timeout=1)
+		if receivedMsg:
+			Msg = receivedMsg["Msg"]         
+			print ("\nOOOUPS ! A MESSAGE JUST ARRIVED FROM GC: " + str(Msg))
 #===================================================================================
 
 #=========== Write to UART - Serial  Port============================================ 
 			try:
-				writeThis(ptsPort,115200, str(newChannel) ) 
+				writeThis(ptsPort,115200, str(Msg) ) 
 			except Exception as e:
 				print ("UART problem: "+str(e) )
 #====================================================================================

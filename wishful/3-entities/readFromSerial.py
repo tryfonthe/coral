@@ -11,6 +11,7 @@ from multiprocessing import Process, Pipe
 import getPTSports #find the avaliable serial port on the local machine 
 from random import randint #just for random tests...
 from threading import Thread
+import json
 
 #initialization and open the port
 
@@ -58,7 +59,10 @@ def readPort(serPort, serBaudRate, controller):
 					#return response
 					#printThis(ser.port,response)#!!!!!!!!!!!
 					print("Received from UART: " + str(response) )
-					controller.send_upstream({"myChannel":response})  
+					j={} # JSON create
+					j["\""+str(controller.id)+"\""]=str(response)
+					json_data=json.dumps(j)
+					controller.send_upstream(json_data)  
 					#returnThis(response)#!!!!!!!!!!!!!!			       
 			ser.close()
 		except Exception as e1:

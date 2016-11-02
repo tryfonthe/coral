@@ -13,6 +13,7 @@ import java.net.SocketException;
 public class MultiThreadServer implements Runnable {
    Socket csocket;
    static int port = 8999;
+   volatile boolean con=false;
    
    MultiThreadServer(Socket csocket) throws IOException {
       this.csocket = csocket;
@@ -37,26 +38,44 @@ public class MultiThreadServer implements Runnable {
    //waiting to receive data
    public void run(){ 
 	   SocketAddress iAdr = csocket.getLocalSocketAddress() ;
-	   try {
-	    	  while(true){
-	    	 
-	    		 //Client address + port 
-		    	 String clientAddress = csocket.getRemoteSocketAddress().toString();
-		    	 int ind=clientAddress.indexOf(":")+1;
-		    	 String clientPort =clientAddress.substring(ind);
-
-		    	 
-		    	 BufferedReader in = new BufferedReader(
-		    			 new InputStreamReader(csocket.getInputStream()));
-		    	 
-		    	 String fromClient = in.readLine();
-		    	 System.out.println();
-		         System.out.println("Client on "+clientPort+": "+fromClient);
-	    	  }
-	      }
+	   con=true;
+	   while(!Thread.currentThread().isInterrupted()){
+		   
+		 //Client address + port 
+		 String clientAddress = csocket.getRemoteSocketAddress().toString();
+		 int ind=clientAddress.indexOf(":")+1;
+		 String clientPort =clientAddress.substring(ind);
+		 
+		BufferedReader in=null;
+		try {
+				in = new BufferedReader(
+					 new InputStreamReader(csocket.getInputStream()));  
+				while (con){
+			    	 String fromClient = in.readLine();
+			    	 if(fromClient!=null)
+			    		 System.out.println("\nClient on "+clientPort+": "+fromClient);
+					
+					 else 
+						 con=false;
+				}
+		}
 	      catch (IOException e) {
-	         System.out.println(e);
+	         System.out.println(e);	
+				System.out.println("Stoping current thread");
+				Thread.currentThread().interrupt();
+	         con=false;
 	      }
+		finally {
+				try {
+					System.out.println("closing BufferedReader");
+					in.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	        
+   	  }
    }
    
    

@@ -1,7 +1,6 @@
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
-
 import org.json.JSONObject;
 
 public class main {
@@ -18,26 +17,43 @@ public class main {
 	  
 	  JSONObject json = new JSONObject();
 	  
-	  while (true) {
-	     Socket sock = ssock.accept();
-	     System.out.println("Client connected..");
+	  boolean con=false;
+
+     Socket sock = ssock.accept();
+     System.out.println("Client connected..");
+     con=true;
+	 
+     while (con) {
 	     //new Thread(new MultiThreadServer(sock)).start();
 	     MultiThreadServer mS = new MultiThreadServer(sock);
 	     t= new Thread(mS);//.start();
 	     t.start();
-	     
+
 	     q.setSocket(mS);
 	     //q.createAndSend("CtrlMsg","TD");
 	     while (true){
-	    	 
+		     if ( sock.isClosed() ){
+			     	System.out.println("con closed");
+			     con=false;
+			     break;
+		     }
+			     
 	 		Scanner in = new Scanner(System.in);
-			System.out.print("Please enter something : ");
-			String input = in.nextLine();      
-			System.out.println("You entered : " + input);
+			System.out.print("Please enter station : ");
+			String station = in.nextLine();      
+			System.out.println("You entered : " + station);
+			System.out.print("Please enter message : ");
+			String msg = in.nextLine();      
+			System.out.println("You entered : " + msg);
+			JSONObject jo = new JSONObject();
+			jo.put("LC",station);
+			jo.put("Msg", msg);
+			q.send(jo);
 			
+			//q.createAndSend(1,input);
 		     //q.send(input+"\n");
-		     q.send(input);
-		     System.out.println("sent: "+input);
+		     //q.send(input);
+		     System.out.println("json sent...");
 		     //Thread.sleep(10000);
 	     }
 	  }

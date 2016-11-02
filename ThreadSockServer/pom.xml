@@ -4,9 +4,14 @@
   <artifactId>ThreadSockServer</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>ThreadSockServer</name>
+  
   <build>
+  
     <sourceDirectory>src</sourceDirectory>
+    
+    
     <plugins>
+      
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.5.1</version>
@@ -15,13 +20,90 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      
+      
+      <plugin>
+      	<groupId>org.opendaylight.yangtools</groupId>
+      	<artifactId>yang-maven-plugin</artifactId>
+      	<version>0.6.1-SNAPSHOT</version>
+      </plugin>
+      
+      <plugin>
+      	<groupId>org.eclipse.m2e</groupId>
+      		<artifactId>lifecycle-mapping</artifactId>
+      			<version>1.0.0</version>
+      				<configuration>
+				          <lifecycleMappingMetadata>
+				              <pluginExecutions>
+				                  <pluginExecution>
+				                      <pluginExecutionFilter>
+				                          <groupId>
+				                              org.opendaylight.controller
+				                          </groupId>
+				                          <artifactId>
+				                              yang-maven-plugin
+				                          </artifactId>
+				                          <versionRange>
+				                              [0.5,)
+				                          </versionRange>
+				                          <goals>
+				                              <goal>
+				                                  generate-sources
+				                              </goal>
+				                          </goals>
+				                      </pluginExecutionFilter>
+				                      <action>
+		                          <ignore></ignore>
+		                      </action>
+		                  </pluginExecution>
+		              </pluginExecutions>
+		          </lifecycleMappingMetadata>
+		      </configuration>
+  		</plugin>
+               
+               
+	         <plugin>
+	         <groupId>org.codehaus.mojo</groupId>
+	         <artifactId>build-helper-maven-plugin</artifactId>
+	         <version>1.7</version>
+	         <executions>
+	             <execution>
+	                 <phase>generate-sources</phase>
+	                 <goals>
+	                     <goal>add-source</goal>
+	                 </goals>
+	                 <configuration>
+	                     <sources>
+	                         <source>target/generated-sources/sal</source>
+	                     </sources>
+		                 </configuration>
+		             </execution>
+		         </executions>
+		     </plugin>
+	           
+               
     </plugins>
+  
   </build>
+  
+  
+
+
+  
   <dependencies>
+  	
   	<dependency>
   		<groupId>org.json</groupId>
   		<artifactId>json</artifactId>
   		<version>20160810</version>
+  	</dependency>
+
+
+
+  	<dependency>
+  		<groupId>org.rpsl4j</groupId>
+  		<artifactId>rpsl4j-opendaylight</artifactId>
+  		<version>0.3</version>
   	</dependency>
   </dependencies>
 </project>
