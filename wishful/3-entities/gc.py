@@ -41,15 +41,16 @@ import threading
 
 
 
-__author__ = "Piotr Gawlowicz, Mikolaj Chwalisz"
-__copyright__ = "Copyright (c) 2015, Technische Universität Berlin"
-__version__ = "0.1.0"
-__email__ = "{gawlowicz, chwalisz}@tkn.tu-berlin.de"
+__author__ = "George Violettas"
+__copyright__ = "Copyright (c) 2016, University of Macedonia, Greece"
+__version__ = "2.1.0"
+__email__ = "georgevio@gmail.com"
 
 
 #connection to Java Socket Server Status
 conJSS=False
 
+# to do: Recover after a JSS failure ???
 
 #========= Java Socks Client ====================================================
 def javaSSConnection():
